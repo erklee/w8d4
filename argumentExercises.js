@@ -16,9 +16,9 @@ function sum1 (...args) {
 
 Function.prototype.myNewBind = function(context) {
     let func = this;
-    let bArgs = Array.from(args).slice(1);
+    let bArgs = Array.from(arguments).slice(1);
     return function _bFunc() {
-        const cArgs = Array.from(args);
+        const cArgs = Array.from(arguments);
         return func.apply(context, bArgs.concat(cArgs));
     };
 };
@@ -44,4 +44,9 @@ class Cat {
   const pavlov = new Dog("Pavlov");
   
 //   markov.says("meow", "Ned");
-markov.says.myNewBind(pavlov, "meow", "Kush")();
+// markov.says.myNewBind(pavlov, "meow", "Kush")();
+// markov.says.myNewBind(pavlov)("meow", "a tree");
+// markov.says.myNewBind(pavlov, "meow")("Markov");
+
+const notMarkovSays = markov.says.myNewBind(pavlov);
+notMarkovSays("meow", "me");
