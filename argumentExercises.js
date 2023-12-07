@@ -1,18 +1,21 @@
-function sum () {
-    let total = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        total += arguments[i]
-    }
+// function sum () {
+//     let total = 0;
+//     for (let i = 0; i < arguments.length; i++) {
+//         total += arguments[i]
+//     }
 
-    return total; 
-};
+//     return total; 
+// };
 
 function sum1 (...args) {
     let total = 0;
     for (let i = 0; i < args.length; i++) {
         total += args[i]
     }
+    return total;
 }
+
+// console.log(sum1(1, 2, 3, 4) === 10);
 
 Function.prototype.myNewBind = function(context) {
     let func = this;
@@ -48,5 +51,28 @@ class Cat {
 // markov.says.myNewBind(pavlov)("meow", "a tree");
 // markov.says.myNewBind(pavlov, "meow")("Markov");
 
-const notMarkovSays = markov.says.myNewBind(pavlov);
-notMarkovSays("meow", "me");
+// const notMarkovSays = markov.says.myNewBind(pavlov);
+// notMarkovSays("meow", "me");
+
+function curriedSum (numArgs) {
+    let numbers = [];
+
+    function _curriedSum (num) {
+        numbers.push(num);
+
+        if (numbers.length === numArgs) {
+            let total = 0;
+
+            for (let i = 0; i < numbers.length; i++ ) {
+                total += numbers[i];
+            }
+            return total;
+        } else {
+            return _curriedSum;
+        }
+    }
+    return _curriedSum;
+}
+// const sum = curriedSum(4);
+// console.log(sum(5)(30)(20)(1));
+
