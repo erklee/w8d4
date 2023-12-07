@@ -1,8 +1,8 @@
 Function.prototype.inherits = function (Parent) {
     function Surrogate() {}
     Surrogate.prototype = Parent.prototype;
-    Child.prototype = new Surrogate();
-    Child.prototype.cunstructor = this;
+    this.prototype = new Surrogate();
+    this.prototype.contructor = this;
 }
 
 function MovingObject () {}
